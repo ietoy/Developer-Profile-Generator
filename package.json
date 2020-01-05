@@ -1,0 +1,27 @@
+{
+  "name": "developer-profile-generator",
+  "version": "1.0.0",
+  "description": "Developer Profile Generator",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ietoy/Developer-Profile-Generator.git"
+  },
+  "keywords": [
+    "Developer",
+    "Profile",
+    "Generator"
+  ],
+  "author": "Ian Toy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ietoy/Developer-Profile-Generator/issues"
+  },
+  "homepage": "https://github.com/ietoy/Developer-Profile-Generator#readme",
+  "dependencies": {
+    "inquirer": "^7.0.2"
+  }
+}
