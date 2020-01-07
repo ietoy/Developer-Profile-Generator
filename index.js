@@ -18,7 +18,7 @@ conversion({ html: '<h1>Text HTML Conversion</h1>' }, function(err, result) {
     }
     console.log(result.numberOfPages);
     console.log(result.logs);
-    result.stream.pipe(fx.createWriteStream('/path/to/anywhere.pdf'));
+    result.stream.pipe(fs.createWriteStream('./testFolder/test.pdf'));
 })
 
 // TEST CASES
