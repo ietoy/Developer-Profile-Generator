@@ -2,9 +2,9 @@
 const fs = require("fs");
 const axios = require("axios");
 const inquirer = require("inquirer");
-const electron = require("electron");
-const electronHTMLto = require("electron-html-to");
 
+// const electron = require("electron");
+// const electronHTMLto = require("electron-html-to");
 
 var username;
 var usercolor;
