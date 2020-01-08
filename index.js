@@ -7,7 +7,7 @@ const electronHTMLto = require("electron-html-to");
 
 
 var username;
-var color;
+var usercolor;
 
 var gitInfo;
 
@@ -62,24 +62,31 @@ inquirer.prompt([
   },
 ]).then(function(response) {
   username = response.username;
-  color = response.color;
+  usercolor = response.color;
 
   const queryURL = "https://api.github.com/users/" + username;
   axios.get(queryURL).then(function(response) {
     gitInfo = response;
-    console.log("Hello " + username + "! Your favorite color is " + color + ".")
+    console.log("Hello " + username + "! Your favorite color is " + usercolor + ".")
     // console.log(gitInfo.data);
-    console.log(gitInfo.data.login);
-    console.log(gitInfo.data.name);
-    console.log(gitInfo.data.avatar_url);
-    console.log(gitInfo.data.bio);
-    console.log(gitInfo.data.public_repos);
-    console.log(gitInfo.data.followers);
-    console.log(gitInfo.data.following);
-    // THESE NEED TO BE LINKED
-    console.log(gitInfo.data.location);
-    console.log(gitInfo.data.html_url);
-    console.log(gitInfo.data.blog);
+
+    // console.log(gitInfo.data.login);
+    // console.log(gitInfo.data.name);
+    // console.log(gitInfo.data.avatar_url);
+    // console.log(gitInfo.data.bio);
+    // console.log(gitInfo.data.public_repos);
+    // console.log(gitInfo.data.followers);
+    // console.log(gitInfo.data.following);
+
+    // // THESE NEED TO BE LINKED
+    // console.log(gitInfo.data.location);
+    // console.log(gitInfo.data.html_url);
+    // console.log(gitInfo.data.blog);
+
+    // generateHTML();
+
+    // console.log(colors[data.usercolor]);
+
 
     generateHTML();
 
@@ -87,19 +94,9 @@ inquirer.prompt([
 });
 
 
-
-
-
-
-
-
-
-
-
 // GENERATE HTML
-function generateHTML(data) {
-  return `
-  <!DOCTYPE html>
+function generateHTML() {
+  return `<!DOCTYPE html>
   <html lang="en">
     <head>
       <meta charset="UTF-8" />
@@ -131,7 +128,6 @@ function generateHTML(data) {
           /* background-color: pink;
           padding-top: 100px; */
           /* ORIG */
-          background-color: ${colors[data.color].wrapperBackground};
           padding-top: 100px;
         }
         body {
@@ -177,8 +173,6 @@ function generateHTML(data) {
         /* background-color: blue;
         color: black; */
         /* ORIG */
-        background-color: ${colors[data.color].headerBackground};
-        color: ${colors[data.color].headerColor};
         padding: 10px;
         width: 95%;
         border-radius: 6px;
@@ -190,9 +184,8 @@ function generateHTML(data) {
         object-fit: cover;
         margin-top: -75px;
         /* TEMP */
-        border: 6px solid red;
+        /* border: 6px solid red; */
         /* ORIG */
-        /* border: 6px solid ${colors[data.color].photoBorderColor}; */
         box-shadow: rgba(0, 0, 0, 0.3) 4px 1px 20px 4px;
         }
         .photo-header h1, .photo-header h2 {
@@ -237,8 +230,6 @@ function generateHTML(data) {
           /* background-color: yellowgreen;
           color: purple; */
           /* ORIG */
-          background-color: ${colors[data.color].headerBackground};
-          color: ${colors[data.color].headerColor};
           margin: 20px;
         }
         .col {
@@ -262,10 +253,23 @@ function generateHTML(data) {
       <div class="container wrapper">
         <!-- PHOTO-HEADER -->
         <div class="photo-header">
-          <img src="profile-pic.jpg" class="card-img" alt="...">
+          <!-- GITHUB PROF PIC -->
+          <img src="${gitInfo.data.avatar_url}" class="card-img" alt="user profile pic">
           <h1>Hello!</h1>
-          <h2>My name is Ian Toy</h2>
-          <h5>Little links to stuff here</h5>            
+          <!-- GITHUB NAME -->
+          <h2>My name is <span>${gitInfo.data.name}</span></h2>
+
+          <div class="row">
+            <div class="col">
+              <a href="${gitInfo.data.location}" class="">My Location</a>
+            </div>
+            <div class="col">
+              <a href="${gitInfo.data.html_url}" class="">GitHub</a>
+            </div>
+            <div class="col">
+              <a href="${gitInfo.data.blog}" class="">Blog</a>
+            </div>
+          </div>
         <!-- END PHOTO-HEADER -->
         </div>
 
@@ -273,7 +277,7 @@ function generateHTML(data) {
           <!-- FIRST ROW -->
           <div class="row">
             <div class="col">
-              <h2 >Bio Here</h2>
+              <h4>${gitInfo.data.bio}</h2>
             </div>
           </div>
 
@@ -282,13 +286,13 @@ function generateHTML(data) {
             <div class="col">
               <div class="card">
                 <h3>Public Repositories</h3>
-                <h4>Number goes Here</h4>
+                <h4>${gitInfo.data.public_repos}</h4>
               </div>
             </div>
             <div class="col">
               <div class="card">
                 <h3>Followers</h3>
-                <h4>Number goes Here</h4>
+                <h4>${gitInfo.data.followers}</h4>
               </div>
             </div>
           </div>
@@ -304,7 +308,7 @@ function generateHTML(data) {
             <div class="col">
               <div class="card">
                 <h3>Following</h3>
-                <h4>Number goes Here</h4>
+                <h4>${gitInfo.data.following}</h4>
               </div>
             </div>
           </div>

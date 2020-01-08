@@ -30,7 +30,6 @@
           /* background-color: pink;
           padding-top: 100px; */
           /* ORIG */
-          /* background-color: ${colors[data.color].wrapperBackground}; */
           padding-top: 100px;
         }
         body {
@@ -76,8 +75,6 @@
         /* background-color: blue;
         color: black; */
         /* ORIG */
-        /* background-color: ${colors[data.color].headerBackground}; */
-        /* color: ${colors[data.color].headerColor}; */
         padding: 10px;
         width: 95%;
         border-radius: 6px;
@@ -91,7 +88,6 @@
         /* TEMP */
         /* border: 6px solid red; */
         /* ORIG */
-        /* border: 6px solid ${colors[data.color].photoBorderColor}; */
         box-shadow: rgba(0, 0, 0, 0.3) 4px 1px 20px 4px;
         }
         .photo-header h1, .photo-header h2 {
@@ -136,8 +132,6 @@
           /* background-color: yellowgreen;
           color: purple; */
           /* ORIG */
-          /* background-color: ${colors[data.color].headerBackground}; */
-          /* color: ${colors[data.color].headerColor}; */
           margin: 20px;
         }
         .col {
@@ -161,10 +155,23 @@
       <div class="container wrapper">
         <!-- PHOTO-HEADER -->
         <div class="photo-header">
-          <img src="profile-pic.jpg" class="card-img" alt="...">
+          <!-- GITHUB PROF PIC -->
+          <img src="${gitInfo.data.avatar_url}" class="card-img" alt="user profile pic">
           <h1>Hello!</h1>
-          <h2>My name is Ian Toy</h2>
-          <h5>Little links to stuff here</h5>            
+          <!-- GITHUB NAME -->
+          <h2>My name is <span>${gitInfo.data.name}</span></h2>
+
+          <div class="row">
+            <div class="col">
+              <a href="${gitInfo.data.location}" class="">My Location</a>
+            </div>
+            <div class="col">
+              <a href="${gitInfo.data.html_url}" class="">GitHub</a>
+            </div>
+            <div class="col">
+              <a href="${gitInfo.data.blog}" class="">Blog</a>
+            </div>
+          </div>
         <!-- END PHOTO-HEADER -->
         </div>
 
@@ -172,7 +179,7 @@
           <!-- FIRST ROW -->
           <div class="row">
             <div class="col">
-              <h2 >Bio Here</h2>
+              <h4>${gitInfo.data.bio}</h2>
             </div>
           </div>
 
@@ -181,13 +188,13 @@
             <div class="col">
               <div class="card">
                 <h3>Public Repositories</h3>
-                <h4>Number goes Here</h4>
+                <h4>${gitInfo.data.public_repos}</h4>
               </div>
             </div>
             <div class="col">
               <div class="card">
                 <h3>Followers</h3>
-                <h4>Number goes Here</h4>
+                <h4>${gitInfo.data.followers}</h4>
               </div>
             </div>
           </div>
@@ -203,7 +210,7 @@
             <div class="col">
               <div class="card">
                 <h3>Following</h3>
-                <h4>Number goes Here</h4>
+                <h4>${gitInfo.data.following}</h4>
               </div>
             </div>
           </div>
