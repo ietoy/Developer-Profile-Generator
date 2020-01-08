@@ -6,7 +6,7 @@
       <meta http-equiv="X-UA-Compatible" content="ie=edge" />
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"/>
       <link href="https://fonts.googleapis.com/css?family=BioRhyme|Cabin&display=swap" rel="stylesheet">
-      <title>Test Profile PDF</title>
+      <title>${userObj.gitInfo.data.name}</title>
       <!-- Bootstrap CSS -->
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
       <style>
@@ -26,10 +26,8 @@
         height: 100%;
         }
         .wrapper {
-          /* TEMP */
-          /* background-color: pink;
-          padding-top: 100px; */
           /* ORIG */
+          background-color: ${userObj.usercolor.wrapperBackground};
           padding-top: 100px;
         }
         body {
@@ -71,10 +69,9 @@
         display: flex;
         justify-content: center;
         flex-wrap: wrap;
-        /* TEMP */
-        /* background-color: blue;
-        color: black; */
         /* ORIG */
+        background-color: ${userObj.usercolor.headerBackground};
+         color: ${userObj.usercolor.headerColor};
         padding: 10px;
         width: 95%;
         border-radius: 6px;
@@ -85,9 +82,10 @@
         border-radius: 50%;
         object-fit: cover;
         margin-top: -75px;
-        /* TEMP */
-        /* border: 6px solid red; */
         /* ORIG */
+        border: 6px solid ${userObj.usercolor.photoBorderColor};
+
+
         box-shadow: rgba(0, 0, 0, 0.3) 4px 1px 20px 4px;
         }
         .photo-header h1, .photo-header h2 {
@@ -128,10 +126,9 @@
         .card {
           padding: 20px;
           border-radius: 6px;
-          /* TEMP */
-          /* background-color: yellowgreen;
-          color: purple; */
           /* ORIG */
+          background-color: ${userObj: usercolor.headerBackground};
+           color: ${userObj.usercolor.headerColor};
           margin: 20px;
         }
         .col {
