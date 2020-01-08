@@ -224,8 +224,21 @@ function generateHTML(data) {
     }
   }
 
-  init();
+  // init();
 
+  // QUERY GITHUB API
+  function askGitHub() {
+    var queryURL = "https://api.github.com/users/" + "ietoy" ;
+
+    $.ajax({
+      url: queryURL,
+      method: "GET"
+    }).then(function(response) {
+      console.log(response)
+    });
+  };
+
+  askGitHub();
 
 // GITHUB API REQUEST STAGING AREA
 
