@@ -2,9 +2,7 @@
 const fs = require("fs");
 const axios = require("axios");
 const inquirer = require("inquirer");
-
-// const electron = require("electron");
-// const electronHTMLto = require("electron-html-to");
+const convertFactory = require('electron-html-to');
 
 var username;
 var usercolor;
@@ -61,20 +59,15 @@ inquirer.prompt([
   username = response.username;
   usercolor = colors[response.color];
 
-  // console.log(usercolor)
-
   const queryURL = "https://api.github.com/users/" + username;
   axios.get(queryURL).then(function(response) {
-    gitInfo = response;
 
-    // console.log("Hello " + username + "! Your favorite color is " + usercolor + ".")
-    
+    gitInfo = response;
     var userObj = {
       gitInfo: gitInfo,
       usercolor: usercolor
     };
-    
-    // console.log(userObj)
+    console.log(gitInfo.data)
     return userObj;
     
   }).then(function(userObj) {
@@ -85,9 +78,30 @@ inquirer.prompt([
         throw err;
       }
       console.log("Success!")
+
+      // PDF CONVERSION
+      fs.readFile(userprofile, 'utf8', (err, htmlString) => {
+        // add local path in case your HTML has relative paths
+        htmlString = htmlString.replace(/href="|src="/g, match => {
+          // return match + 'file://Desktop/hw-repos/Developer-Profile-Generator/profiles';
+        });
+        const conversion = convertFactory({
+          converterPath: convertFactory.converters.PDF,
+          allowLocalFilesAccess: true
+        });
+        conversion({ html: htmlString }, (err, result) => {
+          if (err) return console.error(err);
+          result.stream.pipe(fs.createWriteStream('./profiles/' + username + '.pdf'));
+          conversion.kill(); // necessary if you use the electron-server strategy, see bellow for details
+        });
+      });
+
+      
     });
-  })
-})
+  });
+});
+
+
 
 // GENERATE HTML
 function generateHTML(data) {
@@ -312,29 +326,3 @@ function generateHTML(data) {
   };
 
 
-
-
-
-
-
-
-// var electron = require("electron");
-// var proc = require("child_process");
-
-// var inquirer = require("inquirer");
-// var fs = require('fs');
-
-//     convertFactory = require("electron-html-to");
-
-// var conversion = convertFactory({
-//     converterPath: convertFactory.converters.PDF
-// });
-
-// conversion({ html: '<h1>Text HTML Conversion</h1>' }, function(err, result) {
-//     if (err) {
-//         return console.error(err)
-//     }
-//     console.log(result.numberOfPages);
-//     console.log(result.logs);
-//     result.stream.pipe(fs.createWriteStream('./testFolder/test.pdf'));
-// })
