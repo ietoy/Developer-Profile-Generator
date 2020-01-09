@@ -67,7 +67,6 @@ inquirer.prompt([
       gitInfo: gitInfo,
       usercolor: usercolor
     };
-    console.log(gitInfo.data)
     return userObj;
     
   }).then(function(userObj) {
@@ -95,8 +94,6 @@ inquirer.prompt([
           conversion.kill(); // necessary if you use the electron-server strategy, see bellow for details
         });
       });
-
-      
     });
   });
 });
@@ -260,20 +257,20 @@ function generateHTML(data) {
         <!-- PHOTO-HEADER -->
         <div class="photo-header">
           <!-- GITHUB PROF PIC -->
-          <img src="${gitInfo.data.avatar_url}" class="card-img" alt="user profile pic">
+          <img src="${data.gitInfo.data.avatar_url}" class="card-img" alt="user profile pic">
           <h1>Hello!</h1>
           <!-- GITHUB NAME -->
-          <h2>My name is <span>${gitInfo.data.name}</span></h2>
+          <h2>My name is <span>${data.gitInfo.data.name}</span></h2>
 
           <div class="row">
             <div class="col">
-              <a href="${gitInfo.data.location}" class="">My Location</a>
+              <a href="${data.gitInfo.data.location}" class="">My Location</a>
             </div>
             <div class="col">
-              <a href="${gitInfo.data.html_url}" class="">GitHub</a>
+              <a href="${data.gitInfo.data.html_url}" class="">GitHub</a>
             </div>
             <div class="col">
-              <a href="${gitInfo.data.blog}" class="">Blog</a>
+              <a href="${data.gitInfo.data.blog}" class="">Blog</a>
             </div>
           </div>
         <!-- END PHOTO-HEADER -->
@@ -283,7 +280,7 @@ function generateHTML(data) {
           <!-- FIRST ROW -->
           <div class="row">
             <div class="col">
-              <h4>${gitInfo.data.bio}</h2>
+              <h4>${data.gitInfo.data.bio}</h2>
             </div>
           </div>
 
@@ -292,13 +289,13 @@ function generateHTML(data) {
             <div class="col">
               <div class="card">
                 <h3>Public Repositories</h3>
-                <h4>${gitInfo.data.public_repos}</h4>
+                <h4>${data.gitInfo.data.public_repos}</h4>
               </div>
             </div>
             <div class="col">
               <div class="card">
                 <h3>Followers</h3>
-                <h4>${gitInfo.data.followers}</h4>
+                <h4>${data.gitInfo.data.followers}</h4>
               </div>
             </div>
           </div>
@@ -314,7 +311,7 @@ function generateHTML(data) {
             <div class="col">
               <div class="card">
                 <h3>Following</h3>
-                <h4>${gitInfo.data.following}</h4>
+                <h4>${data.gitInfo.data.following}</h4>
               </div>
             </div>
           </div>
